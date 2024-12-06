@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmcapnif4nk2y"]
+[gd_scene load_steps=6 format=3 uid="uid://bmcapnif4nk2y"]
 
-[ext_resource type="PackedScene" uid="uid://0wbuo5g51k3a" path="res://Classroom.tscn" id="1_ndxd6"]
+[ext_resource type="Script" path="res://environment.gd" id="1_dedoq"]
+[ext_resource type="PackedScene" uid="uid://0wbuo5g51k3a" path="res://classroom.tscn" id="1_ndxd6"]
 [ext_resource type="PackedScene" uid="uid://mh7eybemsg8x" path="res://kid.tscn" id="1_pegt1"]
 [ext_resource type="PackedScene" uid="uid://bp2igvvldfdq4" path="res://teacher.tscn" id="2_dfl5x"]
 [ext_resource type="PackedScene" uid="uid://coetk3tws4bx3" path="res://candy.tscn" id="4_4a0si"]
@@ -16,6 +17,7 @@ light_energy = 3.0
 shadow_enabled = true
 
 [node name="Environment" type="Node" parent="."]
+script = ExtResource("1_dedoq")
 
 [node name="Classroom" parent="." instance=ExtResource("1_ndxd6")]
 
@@ -26,4 +28,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
 
 [node name="Candy" parent="." instance=ExtResource("4_4a0si")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7139, 0, 9)
