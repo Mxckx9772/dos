@@ -26,5 +26,5 @@ Le projet utilise les concepts des systèmes multi-agents (MAS) pour simuler des
 ### Installation
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/yourusername/teacher-candy-classroom.git
-   cd teacher-candy-classroom
+   git clone git@github.com:Mxckx9772/dos.git
+   cd dos
