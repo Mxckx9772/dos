@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmcapnif4nk2y"]
+
+[ext_resource type="PackedScene" uid="uid://0wbuo5g51k3a" path="res://Classroom.tscn" id="1_ndxd6"]
+[ext_resource type="PackedScene" uid="uid://mh7eybemsg8x" path="res://kid.tscn" id="1_pegt1"]
+[ext_resource type="PackedScene" uid="uid://bp2igvvldfdq4" path="res://teacher.tscn" id="2_dfl5x"]
+[ext_resource type="PackedScene" uid="uid://coetk3tws4bx3" path="res://candy.tscn" id="4_4a0si"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(7.74287e-08, 0.5, -0.866025, -4.47035e-08, 0.866025, 0.5, 1, 8.88178e-15, 8.9407e-08, -21.3394, 11.5106, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.957031, 0.176676, -0.229949, -0.251134, -0.108477, 0.961855, 0.144992, 0.978273, 0.148185, 0, 30, 0)
+light_energy = 3.0
+shadow_enabled = true
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Classroom" parent="." instance=ExtResource("1_ndxd6")]
+
+[node name="Kid" parent="." instance=ExtResource("1_pegt1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="Teacher" parent="." instance=ExtResource("2_dfl5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+
+[node name="Candy" parent="." instance=ExtResource("4_4a0si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)

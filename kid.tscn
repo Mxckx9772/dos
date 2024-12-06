@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://mh7eybemsg8x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kcpuk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acsql"]
+
+[node name="Kid" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_kcpuk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CapsuleMesh_acsql")
+
+[node name="Strategy" type="Node" parent="."]
