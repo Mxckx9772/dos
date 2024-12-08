@@ -1,5 +1,6 @@
 extends Node3D
 @onready var candy: Node3D = $"../../Candy"
+@onready var teacher: Node3D = $Teacher
 @onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/MeshInstance3D
 
 #@onready var classroom: Node3D = $"../Classroom"
@@ -8,7 +9,8 @@ extends Node3D
 enum State{
 	WALK_TO_TARGET,
 	RETURN_TO_SAFETY,
-	CHILLING
+	CHILLING,
+	IS_CAUGHT
 }
 var current_state: State = State.WALK_TO_TARGET
 
@@ -40,7 +42,7 @@ var target_position:Vector2
 # for walk long way around
 var center_position:Vector2
 var angle:float = 0.0
-var angle_speed :float = 0.7
+var angle_speed :float = 0.6
 var rayon :float
 var sens
 
@@ -71,6 +73,7 @@ func _ready() -> void:
 	_sensRound()
 	_randomTargetPosition()
 	_stayTime()
+	_setRandomCatchTime() # seulement pour tester!!!!
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,14 +83,20 @@ func _process(delta: float) -> void:
 			match walk_method:
 				"walk_direct":
 					_walkDirect(delta)
+					_isCaught(delta)
 				"walk_random":
 					_walkAleatoire(delta)
+					_isCaught(delta)
 				"walk_around":
 					_walkAround(delta)
+					_isCaught(delta)
 		State.RETURN_TO_SAFETY:
 			_returnToSafety(delta)
+			_isCaught(delta)
 		State.CHILLING:
 			_chill(delta)
+		State.IS_CAUGHT:
+			_returnToSafety(delta)
 	position.y = max(position.y, 0.5)
 
 # for jumping
@@ -110,7 +119,7 @@ func _walkDirect(delta):
 		has_candy = true
 		jumping = true
 		jump_time = 0.0
-		end_position = Vector2(safety_line,candy.position.z)
+		end_position = Vector2(safety_line,position.z)
 		current_state = State.RETURN_TO_SAFETY
 	if(jumping):
 		_handle_jump(delta)
@@ -136,7 +145,7 @@ func _walkAleatoire(delta):
 		has_candy = true
 		jumping = true
 		jump_time = 0.0  
-		end_position = Vector2(safety_line,candy.position.z)
+		end_position = Vector2(safety_line,position.z)
 		current_state = State.RETURN_TO_SAFETY
 	if jumping:
 		_handle_jump(delta)
@@ -170,13 +179,13 @@ func _walkAround(delta):
 		has_candy = true
 		jumping = true
 		jump_time = 0.0
-		end_position = Vector2(safety_line,candy.position.z)
+		end_position = Vector2(safety_line,position.z)
 		current_state = State.RETURN_TO_SAFETY
 	if(jumping):
 		_handle_jump(delta)
 
 
-# move to the safety room
+# back to the safety room
 func _returnToSafety(delta):
 	var direction = (end_position-Vector2(position.x,position.z)).normalized()
 	var offset = direction*speed*delta
@@ -190,6 +199,22 @@ func _returnToSafety(delta):
 		stay_timer=0.0
 		_randomCHill()
 		current_state = State.CHILLING
+
+# been caught
+
+	# seulement pour tester!!!!
+func _setRandomCatchTime() -> void:
+	catch_time_limit = randf_range(1.0, 10.0)
+var timer : float # seulement pour tester!!!!
+var catch_time_limit: float = 0.0 # seulement pour tester!!!!
+func _isCaught(delta):
+	timer += delta
+	#if teacher.catchKid():
+	if timer >= catch_time_limit: # seulement pour tester!!!!
+		current_state = State.IS_CAUGHT
+		end_position = Vector2(safety_line,position.z)
+		timer = 0
+		_setRandomCatchTime() # seulement pour tester!!!!
 
 # move in the safety room
 func _stayTime():
@@ -223,7 +248,6 @@ func _chill(delta):
 func _set_walk_method(method):
 	walk_method = method
 	_uploadColor()
-	
 
 func _uploadColor():
 	if walk_method in color_map:
@@ -232,4 +256,3 @@ func _uploadColor():
 			material = StandardMaterial3D.new()
 			mesh_instance_3d.material_override = material
 		material.albedo_color = color_map[walk_method]
-	
