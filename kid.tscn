@@ -7,6 +7,8 @@
 [node name="Kid" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_mask = 9
+lock_rotation = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("CapsuleShape3D_kcpuk")
