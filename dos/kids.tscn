@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0wxpryke3bv8"]
+
+[ext_resource type="Script" path="res://kids.gd" id="1_xo4o8"]
+[ext_resource type="PackedScene" uid="uid://mh7eybemsg8x" path="res://kid.tscn" id="2_no06m"]
+[ext_resource type="Script" path="res://kid.gd" id="3_bsacl"]
+[ext_resource type="PackedScene" uid="uid://dgglyfcrx4pq1" path="res://sophia.tscn" id="4_6618j"]
+
+[node name="Kids" type="Node3D"]
+script = ExtResource("1_xo4o8")
+
+[node name="Kid" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, 3.00151)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid2" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, 6.41579)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid3" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, -3.86688)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid4" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, -8.37171)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid5" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, -11.5996)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid6" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, 12.5989)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid7" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, 9.93324)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid8" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, 0.166866)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid9" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, -6.33687)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="Kid10" parent="." instance=ExtResource("2_no06m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6045, 0.5, -9.92662)
+visible = false
+script = ExtResource("3_bsacl")
+
+[node name="sophia" parent="." instance=ExtResource("4_6618j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
