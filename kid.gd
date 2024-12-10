@@ -200,13 +200,19 @@ func _returnToSafety(delta):
 
 func isCaught(): 
 	return current_state == State.IS_CAUGHT or current_state == State.CHILLING
+	
+	
+func _toSafeZone(delta) -> void:
+	var waitTime = 10
+	position.x = safety_line
+	end_position = Vector2(safety_line+5,position.z)
 
 func catch(delta):
 	current_state = State.IS_CAUGHT
 	end_position = Vector2(safety_line,position.z)
 	var material = mesh_instance_3d.material_override
 	material.albedo_color = color_map["sad"]
-
+	_toSafeZone(delta)
 # move in the safety room
 func _stayTime():
 	stay_time = randf_range(1.0,10.0)
