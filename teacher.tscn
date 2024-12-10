@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp2igvvldfdq4"]
+[gd_scene load_steps=4 format=3 uid="uid://bp2igvvldfdq4"]
+
+[ext_resource type="Script" path="res://teacher.gd" id="1_qqlbb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_odn1d"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_8ghum"]
 
 [node name="Teacher" type="Node3D"]
+script = ExtResource("1_qqlbb")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="."]
 

@@ -25,7 +25,7 @@ script = ExtResource("1_dedoq")
 [node name="Classroom" parent="." instance=ExtResource("1_ndxd6")]
 
 [node name="Teacher" parent="." instance=ExtResource("2_dfl5x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61301, 5, 0.496694)
 
 [node name="Candy" parent="." instance=ExtResource("4_4a0si")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -2)

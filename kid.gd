@@ -20,6 +20,7 @@ var color_map = {
 	"walk_direct" : Color(1.,0.,0.),
 	"walk_random" : Color(0.,1.,0.),
 	"walk_around" : Color(0.,0.,1.),
+	"sad" : Color(0.5,0.5,0.5),
 }
 
 # for the base
@@ -73,7 +74,6 @@ func _ready() -> void:
 	_sensRound()
 	_randomTargetPosition()
 	_stayTime()
-	_setRandomCatchTime() # seulement pour tester!!!!
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -83,16 +83,12 @@ func _process(delta: float) -> void:
 			match walk_method:
 				"walk_direct":
 					_walkDirect(delta)
-					_isCaught(delta)
 				"walk_random":
 					_walkAleatoire(delta)
-					_isCaught(delta)
 				"walk_around":
 					_walkAround(delta)
-					_isCaught(delta)
 		State.RETURN_TO_SAFETY:
 			_returnToSafety(delta)
-			_isCaught(delta)
 		State.CHILLING:
 			_chill(delta)
 		State.IS_CAUGHT:
@@ -202,19 +198,14 @@ func _returnToSafety(delta):
 
 # been caught
 
-	# seulement pour tester!!!!
-func _setRandomCatchTime() -> void:
-	catch_time_limit = randf_range(1.0, 10.0)
-var timer : float # seulement pour tester!!!!
-var catch_time_limit: float = 0.0 # seulement pour tester!!!!
-func _isCaught(delta):
-	timer += delta
-	#if teacher.catchKid():
-	if timer >= catch_time_limit: # seulement pour tester!!!!
-		current_state = State.IS_CAUGHT
-		end_position = Vector2(safety_line,position.z)
-		timer = 0
-		_setRandomCatchTime() # seulement pour tester!!!!
+func isCaught(): 
+	return current_state == State.IS_CAUGHT or current_state == State.CHILLING
+
+func catch(delta):
+	current_state = State.IS_CAUGHT
+	end_position = Vector2(safety_line,position.z)
+	var material = mesh_instance_3d.material_override
+	material.albedo_color = color_map["sad"]
 
 # move in the safety room
 func _stayTime():
@@ -227,6 +218,7 @@ func _randomCHill():
 	target_position_chill.y = clamp(target_position_chill.y, edge_left_back, edge_right_front)
 
 func _chill(delta):
+	_uploadColor()
 	stay_timer+=delta
 	if(stay_timer<stay_time):
 		if(Vector2(position.x,position.z).distance_to(target_position_chill)<0.1):
