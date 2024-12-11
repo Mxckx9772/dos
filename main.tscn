@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmcapnif4nk2y"]
+[gd_scene load_steps=19 format=3 uid="uid://bmcapnif4nk2y"]
 
 [ext_resource type="Script" path="res://environment.gd" id="1_dedoq"]
 [ext_resource type="PackedScene" uid="uid://bp2igvvldfdq4" path="res://teacher.tscn" id="2_dfl5x"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://candy.gd" id="5_565ip"]
 [ext_resource type="PackedScene" uid="uid://dwnpppaxxxyj0" path="res://safe_zoom.tscn" id="6_roba5"]
 [ext_resource type="Script" path="res://safe_zoom.gd" id="7_xq0na"]
-[ext_resource type="PackedScene" path="res://ui.tscn" id="8_8vf8p"]
+[ext_resource type="Texture2D" uid="uid://dpg523eg7lfn3" path="res://Textures/space.png" id="8_8hol0"]
+[ext_resource type="PackedScene" uid="uid://ccqvsqov0qigv" path="res://ui.tscn" id="8_8vf8p"]
 [ext_resource type="PackedScene" uid="uid://d0wxpryke3bv8" path="res://kids.tscn" id="8_b3wa0"]
+[ext_resource type="Texture2D" uid="uid://b3d8xek8phvch" path="res://Textures/moon.jpg" id="9_fvrua"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygfmd"]
 
@@ -17,11 +19,13 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_0y6fa"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f8ug"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjdbf"]
+albedo_texture = ExtResource("8_8hol0")
 
 [sub_resource type="BoxMesh" id="BoxMesh_7sie5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm41e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3n0vd"]
+albedo_texture = ExtResource("9_fvrua")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fn8nw"]
 
@@ -63,13 +67,13 @@ mesh = SubResource("BoxMesh_0y6fa")
 skeleton = NodePath("../Wall 1")
 
 [node name="Wall 3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.999845, -1.464, -3.61162, 0.0106479, -134.7, 4.12936, 0.0139897, -2.10873, -261.265, 66.1571, 1.06826, -1.07671)
-material_override = SubResource("StandardMaterial3D_2f8ug")
+transform = Transform3D(-0.999845, -1.464, -3.61162, 0.0106479, -134.7, 4.12936, 0.0139897, -2.10873, -261.265, 66.1571, 40.5743, -1.07671)
+material_override = SubResource("StandardMaterial3D_bjdbf")
 mesh = SubResource("BoxMesh_7sie5")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(-155.771, 0, 0, 0, 0.929563, 0, 0, 0, 161.416, -1.35824, -0.457431, -0.602175)
-material_override = SubResource("StandardMaterial3D_jm41e")
+material_override = SubResource("StandardMaterial3D_3n0vd")
 mesh = SubResource("PlaneMesh_fn8nw")
 
 [node name="UI" parent="." instance=ExtResource("8_8vf8p")]
