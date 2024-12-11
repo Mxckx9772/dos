@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq8knq5rdxjs8"]
-
-[ext_resource type="PackedScene" uid="uid://b74l1iw2305r8" path="res://craft_cargoB.dae" id="1_r1rfn"]
-
-[node name="craft_cargoB" instance=ExtResource("1_r1rfn")]
