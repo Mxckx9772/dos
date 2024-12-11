@@ -3,7 +3,7 @@ extends Node3D
 @onready var teacher: Node3D = $Teacher
 @onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/MeshInstance3D
 
-var environment: Node
+#@onready var classroom: Node3D = $"../Classroom"
 
 # state machine
 enum State{
@@ -16,7 +16,6 @@ var current_state: State = State.WALK_TO_TARGET
 
 # distribuer le walk method / color
 var walk_method = ""
-var walk_method_code = 0
 var color_map = {
 	"walk_direct" : Color(1.,0.,0.),
 	"walk_random" : Color(0.,1.,0.),
@@ -47,6 +46,7 @@ var angle:float = 0.0
 var angle_speed :float = 0.6
 var rayon :float
 var sens
+var new_position
 
 # for jumping
 var jump_time: float = 0.0  # jumping timer
@@ -65,7 +65,6 @@ var target_position_chill : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	environment = get_node("../../Environment")
 	start_position = Vector2(position.x,position.z)
 	current_position = start_position
 	end_position = Vector2(candy.position.x,candy.position.z)
@@ -88,8 +87,13 @@ func _process(delta: float) -> void:
 				"walk_random":
 					_walkAleatoire(delta)
 				"walk_around":
+					new_position = Vector2(center_position.x+cos(angle)*rayon,center_position.y+sin(angle)*rayon)
 					_walkAround(delta)
 		State.RETURN_TO_SAFETY:
+			match walk_method:
+				"walk_around":
+					new_position = Vector2(center_position.x+cos(angle)*rayon,center_position.y+sin(angle)*rayon)
+					_walkAround(delta)
 			_returnToSafety(delta)
 		State.CHILLING:
 			_chill(delta)
@@ -168,7 +172,6 @@ func _initAround():
 
 func _walkAround(delta):
 	angle+=delta*angle_speed*sens
-	var new_position = Vector2(center_position.x+cos(angle)*rayon,center_position.y+sin(angle)*rayon)
 	new_position.x = clampf(new_position.x,edge_left_back,edge_right_front)
 	new_position.y = clampf(new_position.y,edge_left_back,edge_right_front)
 	position.x = new_position.x
@@ -196,8 +199,6 @@ func _returnToSafety(delta):
 		_stayTime()
 		stay_timer=0.0
 		_randomCHill()
-		if current_state == State.RETURN_TO_SAFETY:
-			environment.registerSuccess(walk_method_code)
 		current_state = State.CHILLING
 
 # been caught
@@ -246,17 +247,9 @@ func _chill(delta):
 		_randomTargetPosition()
 		_sensRound()
 		current_state = State.WALK_TO_TARGET
-		environment.registerAttempt(walk_method_code)
 
 func _set_walk_method(method):
 	walk_method = method
-	if walk_method == "walk_random":
-		walk_method_code = 0
-	elif walk_method == "walk_direct":
-		walk_method_code = 1
-	else:
-		walk_method_code = 2
-	environment.registerAttempt(walk_method_code)
 	_uploadColor()
 
 func _uploadColor():
