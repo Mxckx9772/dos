@@ -24,6 +24,8 @@ func _process(delta: float) -> void:
 		if isTouch(kid2DPosition) && nbCandy > 0:
 			nbCandy -= 1
 			print("Il reste "+str(nbCandy)+" bonbons dans le bol")
+		elif nbCandy == 0:
+			print("C'est fini, il n'y a plus de bonbon")
 	
 
 func isTouch(kid: Vector2) -> bool:

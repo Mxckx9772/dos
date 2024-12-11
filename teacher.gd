@@ -42,7 +42,7 @@ func findKids(kids: Array):
 func catchKid(kid, delta: float) -> void:
 	var kidPosition = Vector2(kid.position.x, kid.position.z)
 	var position2D = Vector2(position.x, position.z)
-	if position2D.distance_to(kidPosition) < 2:
+	if position2D.distance_to(kidPosition) < 1:
 		kid.catch(delta)
 
 	var direction = (kidPosition - position2D).normalized()

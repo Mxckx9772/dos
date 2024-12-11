@@ -44,6 +44,8 @@ script = ExtResource("1_dedoq")
 
 [node name="Teacher" parent="." instance=ExtResource("2_dfl5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07299, 0.259355, -0.231916)
+speed = 3
+runSpeed = 5
 
 [node name="Candy" parent="." instance=ExtResource("4_4a0si")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -13.842, -0.5, -0.16)
