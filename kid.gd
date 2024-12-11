@@ -3,7 +3,7 @@ extends Node3D
 @onready var teacher: Node3D = $Teacher
 @onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/MeshInstance3D
 
-#@onready var classroom: Node3D = $"../Classroom"
+var environment: Node
 
 # state machine
 enum State{
@@ -16,6 +16,7 @@ var current_state: State = State.WALK_TO_TARGET
 
 # distribuer le walk method / color
 var walk_method = ""
+var walk_method_code = 0
 var color_map = {
 	"walk_direct" : Color(1.,0.,0.),
 	"walk_random" : Color(0.,1.,0.),
@@ -64,6 +65,7 @@ var target_position_chill : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	environment = get_node("../../Environment")
 	start_position = Vector2(position.x,position.z)
 	current_position = start_position
 	end_position = Vector2(candy.position.x,candy.position.z)
@@ -194,6 +196,8 @@ func _returnToSafety(delta):
 		_stayTime()
 		stay_timer=0.0
 		_randomCHill()
+		if current_state == State.RETURN_TO_SAFETY:
+			environment.registerSuccess(walk_method_code)
 		current_state = State.CHILLING
 
 # been caught
@@ -242,9 +246,17 @@ func _chill(delta):
 		_randomTargetPosition()
 		_sensRound()
 		current_state = State.WALK_TO_TARGET
+		environment.registerAttempt(walk_method_code)
 
 func _set_walk_method(method):
 	walk_method = method
+	if walk_method == "walk_random":
+		walk_method_code = 0
+	elif walk_method == "walk_direct":
+		walk_method_code = 1
+	else:
+		walk_method_code = 2
+	environment.registerAttempt(walk_method_code)
 	_uploadColor()
 
 func _uploadColor():
