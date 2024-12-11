@@ -214,8 +214,8 @@ func _toSafeZone(delta) -> void:
 func catch(delta):
 	current_state = State.IS_CAUGHT
 	end_position = Vector2(safety_line,position.z)
-	var material = mesh_instance_3d.material_override
-	material.albedo_color = color_map["sad"]
+	# var material = mesh_instance_3d.material_override
+	# material.albedo_color = color_map["sad"]
 	_toSafeZone(delta)
 # move in the safety room
 func _stayTime():
@@ -260,9 +260,10 @@ func _set_walk_method(method):
 	_uploadColor()
 
 func _uploadColor():
-	if walk_method in color_map:
-		var material = mesh_instance_3d.material_override
-		if material == null:
-			material = StandardMaterial3D.new()
-			mesh_instance_3d.material_override = material
-		material.albedo_color = color_map[walk_method]
+	pass
+	#if walk_method in color_map:
+		#var material = mesh_instance_3d.material_override
+		#if material == null:
+			#material = StandardMaterial3D.new()
+			#mesh_instance_3d.material_override = material
+		#material.albedo_color = color_map[walk_method]
