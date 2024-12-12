@@ -1,10 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwnpppaxxxyj0"]
+[gd_scene load_steps=7 format=3 uid="uid://dwnpppaxxxyj0"]
+
+[ext_resource type="ArrayMesh" uid="uid://b6dmtcfkuj8uw" path="res://structure_detailed.obj" id="1_bwy8u"]
+[ext_resource type="Texture2D" uid="uid://bfcw7dvuh3bse" path="res://Textures/metal.png" id="1_sulhi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_papq3"]
 size = Vector3(4, 0, 30)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_nnl8w"]
-size = Vector2(4, 30)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5x71y"]
+albedo_color = Color(0.0745098, 1, 1, 1)
+albedo_texture = ExtResource("1_sulhi")
+albedo_texture_force_srgb = true
+emission_enabled = true
+emission = Color(0.226707, 0.226707, 0.226707, 1)
+uv1_scale = Vector3(-0.02, -0.02, -0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_py3n8"]
+transparency = 1
+albedo_color = Color(0.615686, 1, 1, 0.321569)
+emission_enabled = true
+emission = Color(0.615686, 1, 1, 1)
+emission_energy_multiplier = 0.55
+
+[sub_resource type="QuadMesh" id="QuadMesh_6md4t"]
 
 [node name="safeZoom" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.5, 0)
@@ -13,4 +30,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.5, 0)
 shape = SubResource("BoxShape3D_papq3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_nnl8w")
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 35, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5x71y")
+mesh = ExtResource("1_bwy8u")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.31134e-06, 0, -1, 0, 3, 0, 30, 0, -4.37114e-08, 2, 2, 0)
+material_override = SubResource("StandardMaterial3D_py3n8")
+mesh = SubResource("QuadMesh_6md4t")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.31134e-06, 0.00905824, -0.999995, 3.95948e-09, 2.99999, 0.00301941, 30, 0, -4.37114e-08, -1.80453, 2, 0)
+material_override = SubResource("StandardMaterial3D_py3n8")
+mesh = SubResource("QuadMesh_6md4t")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999004, 0.0446133, 0, -0.0446133, 0.999004, 0, 0, 0, 1, 0.0935507, 3.9255, -13.8947)
+light_color = Color(0, 1, 1, 1)
+light_energy = 13.121
+omni_range = 3.86024
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999004, 0.0446133, 0, -0.0446133, 0.999004, 0, 0, 0, 1, 0.0935507, 3.9255, -8.12757)
+light_color = Color(0, 1, 1, 1)
+light_energy = 13.121
+omni_range = 3.86024
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999004, 0.0446133, 0, -0.0446133, 0.999004, 0, 0, 0, 1, 0.0935507, 3.9255, 0.011117)
+light_color = Color(0, 1, 1, 1)
+light_energy = 13.121
+omni_range = 3.86024
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999004, 0.0446133, 0, -0.0446133, 0.999004, 0, 0, 0, 1, 0.0935507, 3.9255, 7.90726)
+light_color = Color(0, 1, 1, 1)
+light_energy = 13.121
+omni_range = 3.86024
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999004, 0.0446133, 0, -0.0446133, 0.999004, 0, 0, 0, 1, 0.0935507, 3.9255, 13.9169)
+light_color = Color(0, 1, 1, 1)
+light_energy = 13.121
+omni_range = 3.86024

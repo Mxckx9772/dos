@@ -1,9 +1,9 @@
 extends Node3D
 @onready var candy: Node3D = $"../../Candy"
 @onready var teacher: Node3D = $Teacher
-@onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/MeshInstance3D
+@onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/CraftSpeederB
 
-#@onready var classroom: Node3D = $"../Classroom"
+var environment: Node
 
 # state machine
 enum State{
@@ -16,10 +16,12 @@ var current_state: State = State.WALK_TO_TARGET
 
 # distribuer le walk method / color
 var walk_method = ""
+var walk_method_code = 0
 var color_map = {
-	"walk_direct" : Color(1.,0.,0.),
-	"walk_random" : Color(0.,1.,0.),
-	"walk_around" : Color(0.,0.,1.),
+	"walk_direct" : "./Textures/v_r.png",
+	"walk_random" : "./Textures/v_g.png",
+	"walk_around" : "./Textures/v_b.png",
+	"sad" : Color(0.5,0.5,0.5),
 }
 
 # for the base
@@ -33,6 +35,7 @@ var is_touched_by_teacher : bool = false # not yet
 var back_to_safetyroom : bool = false
 var nb_candy : int = 0
 var safety_line : float = 10. # position x of the edge of the safety room
+
 
 
 # for wove randomly
@@ -63,6 +66,7 @@ var target_position_chill : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	environment = get_node("../../Environment")
 	start_position = Vector2(position.x,position.z)
 	current_position = start_position
 	end_position = Vector2(candy.position.x,candy.position.z)
@@ -73,26 +77,22 @@ func _ready() -> void:
 	_sensRound()
 	_randomTargetPosition()
 	_stayTime()
-	_setRandomCatchTime() # seulement pour tester!!!!
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	match current_state:
 		State.WALK_TO_TARGET:
 			match walk_method:
 				"walk_direct":
 					_walkDirect(delta)
-					_isCaught(delta)
 				"walk_random":
 					_walkAleatoire(delta)
-					_isCaught(delta)
 				"walk_around":
 					_walkAround(delta)
-					_isCaught(delta)
 		State.RETURN_TO_SAFETY:
 			_returnToSafety(delta)
-			_isCaught(delta)
 		State.CHILLING:
 			_chill(delta)
 		State.IS_CAUGHT:
@@ -109,12 +109,18 @@ func _handle_jump(delta):
 		position.y = position_y
 		jumping = false
 
+#for rotation
+func _update_rotation(direction):
+	var angle_rotation = atan2(direction.y,direction.x)
+	rotation.y = -angle_rotation
+
 # strategy 1 : walk straight
 func _walkDirect(delta):
 	var direction = (end_position-Vector2(position.x,position.z)).normalized()
 	var offset = direction*speed*delta
 	position.x +=offset.x
 	position.z +=offset.y
+	_update_rotation(direction)
 	if(Vector2(position.x,position.z).distance_to(end_position)<1):
 		has_candy = true
 		jumping = true
@@ -135,6 +141,7 @@ func _randomTargetPosition():
 # strategy 2 : walk randomly
 func _walkAleatoire(delta):
 	var direction = (target_position-current_position).normalized()
+	_update_rotation(direction)
 	var offset = direction*speed*delta
 	current_position+=offset
 	position.x += offset.x
@@ -175,6 +182,10 @@ func _walkAround(delta):
 	new_position.y = clampf(new_position.y,edge_left_back,edge_right_front)
 	position.x = new_position.x
 	position.z = new_position.y
+	if sens == -1:
+		rotation.y = 90-angle
+	else:
+		rotation.y = -90-angle
 	if(Vector2(position.x,position.z).distance_to(end_position)<1):
 		has_candy = true
 		jumping = true
@@ -188,6 +199,7 @@ func _walkAround(delta):
 # back to the safety room
 func _returnToSafety(delta):
 	var direction = (end_position-Vector2(position.x,position.z)).normalized()
+	_update_rotation(direction)
 	var offset = direction*speed*delta
 	position.x += offset.x
 	position.z += offset.y
@@ -198,24 +210,27 @@ func _returnToSafety(delta):
 		_stayTime()
 		stay_timer=0.0
 		_randomCHill()
+		if current_state == State.RETURN_TO_SAFETY:
+			environment.registerSuccess(walk_method_code)
 		current_state = State.CHILLING
 
 # been caught
 
-	# seulement pour tester!!!!
-func _setRandomCatchTime() -> void:
-	catch_time_limit = randf_range(1.0, 10.0)
-var timer : float # seulement pour tester!!!!
-var catch_time_limit: float = 0.0 # seulement pour tester!!!!
-func _isCaught(delta):
-	timer += delta
-	#if teacher.catchKid():
-	if timer >= catch_time_limit: # seulement pour tester!!!!
-		current_state = State.IS_CAUGHT
-		end_position = Vector2(safety_line,position.z)
-		timer = 0
-		_setRandomCatchTime() # seulement pour tester!!!!
+func isCaught(): 
+	return current_state == State.IS_CAUGHT or current_state == State.CHILLING
+	
+	
+func _toSafeZone(delta) -> void:
+	var waitTime = 10
+	position.x = safety_line
+	end_position = Vector2(safety_line+5,position.z)
 
+func catch(delta):
+	current_state = State.IS_CAUGHT
+	end_position = Vector2(safety_line,position.z)
+	var material = mesh_instance_3d.material_override
+	material.albedo_color = color_map["sad"]
+	_toSafeZone(delta)
 # move in the safety room
 func _stayTime():
 	stay_time = randf_range(1.0,10.0)
@@ -227,6 +242,7 @@ func _randomCHill():
 	target_position_chill.y = clamp(target_position_chill.y, edge_left_back, edge_right_front)
 
 func _chill(delta):
+	_uploadColor()
 	stay_timer+=delta
 	if(stay_timer<stay_time):
 		if(Vector2(position.x,position.z).distance_to(target_position_chill)<0.1):
@@ -237,6 +253,7 @@ func _chill(delta):
 			var offset = direction * speed * delta
 			position.x += offset.x
 			position.z += offset.y
+			_update_rotation(direction)
 	else:
 		current_position = Vector2(position.x, position.z)
 		
@@ -244,15 +261,23 @@ func _chill(delta):
 		_randomTargetPosition()
 		_sensRound()
 		current_state = State.WALK_TO_TARGET
+		environment.registerAttempt(walk_method_code)
 
 func _set_walk_method(method):
 	walk_method = method
+	if walk_method == "walk_random":
+		walk_method_code = 0
+	elif walk_method == "walk_direct":
+		walk_method_code = 1
+	else:
+		walk_method_code = 2
+	environment.registerAttempt(walk_method_code)
 	_uploadColor()
 
 func _uploadColor():
+	pass
 	if walk_method in color_map:
-		var material = mesh_instance_3d.material_override
-		if material == null:
-			material = StandardMaterial3D.new()
-			mesh_instance_3d.material_override = material
-		material.albedo_color = color_map[walk_method]
+		var material = StandardMaterial3D.new()
+		material.albedo_texture = load(color_map[walk_method])
+		material.uv1_scale = Vector3(0.01, 0.01,0.01)
+		mesh_instance_3d.material_override = material

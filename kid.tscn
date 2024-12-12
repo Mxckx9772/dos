@@ -1,19 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://mh7eybemsg8x"]
+[gd_scene load_steps=6 format=3 uid="uid://mh7eybemsg8x"]
+
+[ext_resource type="ArrayMesh" uid="uid://cbm0quwpb4nbp" path="res://craft_speederB.obj" id="1_6kl0a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kcpuk"]
+height = 2.32704
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_acsql"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnak4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjy1y"]
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 4.46
+
+[sub_resource type="QuadMesh" id="QuadMesh_ksime"]
 
 [node name="Kid" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.30706e-08, 0.170605, 0.98534, 7.45738e-09, 0.98534, -0.170605, -1, 0, -4.37114e-08, 0, 0, 0)
 collision_mask = 9
 lock_rotation = true
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.236103, -0.149885)
 shape = SubResource("CapsuleShape3D_kcpuk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("CapsuleMesh_acsql")
+[node name="CraftSpeederB" type="MeshInstance3D" parent="RigidBody3D"]
+material_override = SubResource("StandardMaterial3D_hnak4")
+mesh = ExtResource("1_6kl0a")
 
-[node name="Strategy" type="Node" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.30825e-08, -0.0274499, -0.299293, -8.99905e-10, -0.399057, 0.0205874, -0.3, 0, -1.31134e-08, -0.904007, 0.390092, -0.392315)
+material_override = SubResource("StandardMaterial3D_xjy1y")
+mesh = SubResource("QuadMesh_ksime")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.63034e-09, -0.0163154, -0.29598, -5.9589e-08, -0.0986601, 0.0489462, -0.4, 1.43864e-08, -1.29377e-08, -0.598459, 0.152203, -0.796094)
+material_override = SubResource("StandardMaterial3D_xjy1y")
+mesh = SubResource("QuadMesh_ksime")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.63034e-09, -0.0163154, -0.29598, -5.9589e-08, -0.0986601, 0.0489462, -0.4, 1.43864e-08, -1.29377e-08, -0.598459, 0.152203, 0.794999)
+material_override = SubResource("StandardMaterial3D_xjy1y")
+mesh = SubResource("QuadMesh_ksime")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.30825e-08, -0.0274499, -0.299293, -8.99905e-10, -0.399057, 0.0205874, -0.3, 0, -1.31134e-08, -0.904007, 0.401268, 0.403926)
+material_override = SubResource("StandardMaterial3D_xjy1y")
+mesh = SubResource("QuadMesh_ksime")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02336, 0.381055, -0.413284)
+light_color = Color(0.2, 1, 1, 1)
+omni_range = 0.340826
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02336, 0.381055, 0.378735)
+light_color = Color(0.2, 1, 1, 1)
+omni_range = 0.340826

@@ -1,17 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp2igvvldfdq4"]
+[gd_scene load_steps=12 format=3 uid="uid://bp2igvvldfdq4"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_odn1d"]
+[ext_resource type="Script" path="res://teacher.gd" id="1_qqlbb"]
+[ext_resource type="Texture2D" uid="uid://dgpj42xk4u4k0" path="res://Textures/maitresse.png" id="2_oit1l"]
+[ext_resource type="ArrayMesh" uid="uid://chyrd3keqiubn" path="res://machine_barrelLarge.obj" id="3_mt2tu"]
+[ext_resource type="Texture2D" uid="uid://lkiuxk6rall2" path="res://Textures/maitresse_dent.png" id="4_meg1r"]
+[ext_resource type="ArrayMesh" uid="uid://damgskwu7xwju" path="res://bones.obj" id="5_jlacd"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_8ghum"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lml5n"]
+radius = 0.580505
+height = 1.24325
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m43rg"]
+albedo_texture = ExtResource("2_oit1l")
+uv1_scale = Vector3(0.03, 0.03, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fspan"]
+albedo_texture = ExtResource("4_meg1r")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld0kr"]
+albedo_texture = ExtResource("4_meg1r")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c17x6"]
+albedo_color = Color(0.605674, 1.66051e-06, 3.85046e-07, 1)
+emission_enabled = true
+emission = Color(0.99971, 0.0924949, 0.0607051, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dxjtl"]
 
 [node name="Teacher" type="Node3D"]
+script = ExtResource("1_qqlbb")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_odn1d")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.24508, 0)
+shape = SubResource("CapsuleShape3D_lml5n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_8ghum")
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_m43rg")
+mesh = ExtResource("3_mt2tu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_fspan")
+mesh = ExtResource("5_jlacd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ld0kr")
+mesh = ExtResource("5_jlacd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.00448, 0)
+material_override = SubResource("StandardMaterial3D_c17x6")
+mesh = SubResource("SphereMesh_dxjtl")
 
 [node name="Strategy" type="Node" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 0, 0.0627451, 1)
+spot_range = 3.41707
+spot_angle = 79.5397
