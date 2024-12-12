@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmcapnif4nk2y"]
+[gd_scene load_steps=18 format=3 uid="uid://bmcapnif4nk2y"]
 
 [ext_resource type="Script" path="res://environment.gd" id="1_dedoq"]
 [ext_resource type="PackedScene" uid="uid://bp2igvvldfdq4" path="res://teacher.tscn" id="2_dfl5x"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://d0wxpryke3bv8" path="res://kids.tscn" id="8_b3wa0"]
 [ext_resource type="Texture2D" uid="uid://b3d8xek8phvch" path="res://Textures/moon.jpg" id="9_fvrua"]
 [ext_resource type="PackedScene" uid="uid://dth10pjtlbvct" path="res://rock.tscn" id="10_0et68"]
+[ext_resource type="AudioStream" uid="uid://j1g2v0r7b7h3" path="res://Audio/Candy.mp3" id="11_bhpai"]
+[ext_resource type="AudioStream" uid="uid://h4w6x866h04j" path="res://Audio/Laser.mp3" id="12_wyyfv"]
+[ext_resource type="AudioStream" uid="uid://duffh8b4iqtyl" path="res://Audio/BackgroundAudio.mp3" id="13_adpxh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjdbf"]
 albedo_texture = ExtResource("8_8hol0")
@@ -43,6 +46,10 @@ runSpeed = 7
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -13.842, 0.138092, -0.16)
 script = ExtResource("5_565ip")
 
+[node name="CandyStreamPlayer" type="AudioStreamPlayer3D" parent="Candy"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.921, -0.069046, 0.08)
+stream = ExtResource("11_bhpai")
+
 [node name="safeZoom" parent="." instance=ExtResource("6_roba5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 13, -0.45, 0)
 
@@ -61,3 +68,9 @@ mesh = SubResource("PlaneMesh_fn8nw")
 [node name="UI" parent="." instance=ExtResource("8_8vf8p")]
 
 [node name="rocks" parent="." instance=ExtResource("10_0et68")]
+
+[node name="LaserStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_wyyfv")
+
+[node name="BackgroundStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_adpxh")

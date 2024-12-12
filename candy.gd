@@ -1,8 +1,9 @@
 extends Node3D
 #@onready var mesh_instance_3d: MeshInstance3D = $Candy/MeshInstance3D
-
+@onready var candyAudio = $CandyStreamPlayer
 
 @export var nbCandy = 200
+
 var time :float
 var environment
 var speed : float = 0.5
@@ -21,6 +22,7 @@ func _process(delta: float) -> void:
 	for kid in kids:
 		var kid2DPosition = Vector2(kid.position.x, kid.position.z)
 		if isTouch(kid2DPosition) && nbCandy > 0:
+			candyAudio.play()
 			nbCandy -= 1
 			print("Il reste "+str(nbCandy)+" bonbons dans le bol")
 		elif nbCandy == 0:

@@ -2,6 +2,8 @@ extends Node3D
 @onready var candy: Node3D = $"../../Candy"
 @onready var teacher: Node3D = $Teacher
 @onready var mesh_instance_3d: MeshInstance3D = $RigidBody3D/CraftSpeederB
+@onready var laserAudio = $"../../LaserStreamPlayer"
+@onready var bgAudio = $"../../BackgroundStreamPlayer"
 
 var environment: Node
 
@@ -66,6 +68,7 @@ var target_position_chill : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	bgAudio.play()
 	environment = get_node("../../Environment")
 	start_position = Vector2(position.x,position.z)
 	current_position = start_position
@@ -226,6 +229,7 @@ func _toSafeZone(delta) -> void:
 	end_position = Vector2(safety_line+5,position.z)
 
 func catch(delta):
+	laserAudio.play()
 	current_state = State.IS_CAUGHT
 	end_position = Vector2(safety_line,position.z)
 	var material = mesh_instance_3d.material_override
