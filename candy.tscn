@@ -1,14 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://coetk3tws4bx3"]
 
-[ext_resource type="ArrayMesh" uid="uid://duh72dkymog7o" path="res://rock_crystals.obj" id="1_64kxt"]
 [ext_resource type="Texture2D" uid="uid://sfssv4gxntq1" path="res://Textures/rock_crystalsLargeB.png" id="1_h7w1l"]
+[ext_resource type="ArrayMesh" uid="uid://b4gqdsnp5bjeq" path="res://machine_wirelessCable.obj" id="2_algdk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvi02"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3dw7"]
-albedo_texture = ExtResource("1_h7w1l")
+metallic = 1.0
+metallic_specular = 0.73
+metallic_texture = ExtResource("1_h7w1l")
+roughness = 0.16
+emission_enabled = true
+emission = Color(0.0699829, 0.354507, 0.513042, 1)
+uv1_scale = Vector3(0.08, 0.08, 0.08)
+disable_receive_shadows = true
 
 [node name="Candy" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Candy" type="StaticBody3D" parent="."]
 collision_layer = 4
@@ -19,5 +27,12 @@ metadata/_edit_group_ = true
 shape = SubResource("BoxShape3D_kvi02")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Candy"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_i3dw7")
-mesh = ExtResource("1_64kxt")
+mesh = ExtResource("2_algdk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.475387, 0)
+light_color = Color(0.0705882, 0.352941, 0.513726, 1)
+light_energy = 2.777
+omni_range = 3.70119

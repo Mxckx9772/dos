@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://dth10pjtlbvct"]
+
+[ext_resource type="Texture2D" uid="uid://b3d8xek8phvch" path="res://Textures/moon.jpg" id="1_lwdde"]
+[ext_resource type="ArrayMesh" uid="uid://dvlur60em8sfi" path="res://stones.obj" id="2_nct3x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8th4m"]
+albedo_color = Color(0.791999, 0.791999, 0.791999, 1)
+albedo_texture = ExtResource("1_lwdde")
+emission = Color(0.541176, 0.541176, 0.541176, 1)
+
+[node name="rock" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.673, -0.44, -8.163)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 26.8138, 0, -10.4888)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 13.0727, 0, -9.76125)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, -1.9094, 0, 23.2658)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(16, 0, 0, 0, 11, 0, 0, 0, 16, 36.3842, 0, 46.8637)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(16, 0, 0, 0, 11, 0, 0, 0, 16, 66.7952, 0, 41.3583)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
+transform = Transform3D(16, 0, 0, 0, 11, 0, 0, 0, 16, 66.7952, 0, -32.9652)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
+transform = Transform3D(33, 0, 0, 0, 33, 0, 0, 0, 33, 89.9967, 0, -54.2005)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(23, 0, 0, 0, 34, 0, 0, 0, 21, 89.0791, 0, 31.396)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 64, 0, 0, 0, 32, 54.0803, 0, -1.50554)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 64, 0, 0, 0, 32, 54.0803, 0, 82.3869)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 16, 0, 0, 0, 32, 40.7426, 0, -48.1395)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 17.537, 0, 13.1313)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 3, 3.05853, 0, -7.80764)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.9832, 0, -12.7107)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 5.87688, 0, 31.2914)
+material_override = SubResource("StandardMaterial3D_8th4m")
+mesh = ExtResource("2_nct3x")

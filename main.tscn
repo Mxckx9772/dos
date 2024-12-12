@@ -1,23 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://bmcapnif4nk2y"]
+[gd_scene load_steps=18 format=3 uid="uid://bmcapnif4nk2y"]
 
 [ext_resource type="Script" path="res://environment.gd" id="1_dedoq"]
 [ext_resource type="PackedScene" uid="uid://bp2igvvldfdq4" path="res://teacher.tscn" id="2_dfl5x"]
 [ext_resource type="PackedScene" uid="uid://coetk3tws4bx3" path="res://candy.tscn" id="4_4a0si"]
 [ext_resource type="Script" path="res://candy.gd" id="5_565ip"]
 [ext_resource type="PackedScene" uid="uid://dwnpppaxxxyj0" path="res://safe_zoom.tscn" id="6_roba5"]
-[ext_resource type="Script" path="res://safe_zoom.gd" id="7_xq0na"]
 [ext_resource type="Texture2D" uid="uid://dpg523eg7lfn3" path="res://Textures/space.png" id="8_8hol0"]
 [ext_resource type="PackedScene" uid="uid://ccqvsqov0qigv" path="res://ui.tscn" id="8_8vf8p"]
 [ext_resource type="PackedScene" uid="uid://d0wxpryke3bv8" path="res://kids.tscn" id="8_b3wa0"]
 [ext_resource type="Texture2D" uid="uid://b3d8xek8phvch" path="res://Textures/moon.jpg" id="9_fvrua"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygfmd"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_lrrs2"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxe22"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_0y6fa"]
+[ext_resource type="PackedScene" uid="uid://dth10pjtlbvct" path="res://rock.tscn" id="10_0et68"]
+[ext_resource type="AudioStream" uid="uid://j1g2v0r7b7h3" path="res://Audio/Candy.mp3" id="11_bhpai"]
+[ext_resource type="AudioStream" uid="uid://h4w6x866h04j" path="res://Audio/Laser.mp3" id="12_wyyfv"]
+[ext_resource type="AudioStream" uid="uid://duffh8b4iqtyl" path="res://Audio/BackgroundAudio.mp3" id="13_adpxh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjdbf"]
 albedo_texture = ExtResource("8_8hol0")
@@ -36,7 +31,7 @@ transform = Transform3D(8.60844e-08, 0.27008, -0.962838, -2.4147e-08, 0.962838, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.724712, 0.248153, -0.642816, -0.605733, 0.21525, 0.765999, 0.328451, 0.944504, -0.00567956, -18.4548, 82.3477, 0.314135)
-light_energy = 0.5
+light_energy = 0.7
 shadow_enabled = true
 
 [node name="Environment" type="Node" parent="."]
@@ -45,31 +40,23 @@ script = ExtResource("1_dedoq")
 [node name="Teacher" parent="." instance=ExtResource("2_dfl5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07299, 0.259355, -0.231916)
 speed = 3
-runSpeed = 5
+runSpeed = 7
 
 [node name="Candy" parent="." instance=ExtResource("4_4a0si")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -13.842, -0.5, -0.16)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -13.842, 0.138092, -0.16)
 script = ExtResource("5_565ip")
 
+[node name="CandyStreamPlayer" type="AudioStreamPlayer3D" parent="Candy"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.921, -0.069046, 0.08)
+stream = ExtResource("11_bhpai")
+
 [node name="safeZoom" parent="." instance=ExtResource("6_roba5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.45, 0)
-script = ExtResource("7_xq0na")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 13, -0.45, 0)
 
 [node name="Kids" parent="." instance=ExtResource("8_b3wa0")]
 
-[node name="Wall 1" type="MeshInstance3D" parent="."]
-transform = Transform3D(118.84, 0, 0, 0, 107.091, 0, 0, 0, 0.745049, 8.56728, 48.0561, -178.538)
-material_override = SubResource("StandardMaterial3D_ygfmd")
-mesh = SubResource("BoxMesh_lrrs2")
-
-[node name="Wall 2" type="MeshInstance3D" parent="."]
-transform = Transform3D(121.676, 0, 0, 0, 86.3502, 0, 0, 0, 0.817264, 6.40358, 42.35, 183.67)
-material_override = SubResource("StandardMaterial3D_hxe22")
-mesh = SubResource("BoxMesh_0y6fa")
-skeleton = NodePath("../Wall 1")
-
 [node name="Wall 3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.999845, -1.464, -3.61162, 0.0106479, -134.7, 4.12936, 0.0139897, -2.10873, -261.265, 66.1571, 40.5743, -1.07671)
+transform = Transform3D(-0.999845, -1.46399, -6.91025, 0.0106479, -134.7, 7.90089, 0.0139897, -2.10872, -499.89, 99.7476, 40.574, -1.077)
 material_override = SubResource("StandardMaterial3D_bjdbf")
 mesh = SubResource("BoxMesh_7sie5")
 
@@ -79,3 +66,12 @@ material_override = SubResource("StandardMaterial3D_3n0vd")
 mesh = SubResource("PlaneMesh_fn8nw")
 
 [node name="UI" parent="." instance=ExtResource("8_8vf8p")]
+
+[node name="rocks" parent="." instance=ExtResource("10_0et68")]
+
+[node name="LaserStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_wyyfv")
+
+[node name="BackgroundStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_adpxh")
+parameters/looping = true

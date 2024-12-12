@@ -7,35 +7,40 @@ offset_left = 23.0
 offset_top = 38.0
 offset_right = 228.0
 offset_bottom = 112.0
+scale = Vector2(2, 2)
 text = "Taux de reussité (enfants):"
 
 [node name="LabelA" type="Label" parent="."]
 modulate = Color(0.313726, 0.835294, 0.188235, 1)
 offset_left = 24.0
-offset_top = 70.0
+offset_top = 80.0
 offset_right = 64.0
-offset_bottom = 93.0
+offset_bottom = 103.0
+scale = Vector2(2, 2)
 text = "50%"
 
 [node name="LabelB" type="Label" parent="."]
 modulate = Color(1, 0.337255, 0.211765, 1)
 offset_left = 24.0
-offset_top = 95.0
+offset_top = 120.0
 offset_right = 64.0
-offset_bottom = 118.0
+offset_bottom = 143.0
+scale = Vector2(2, 2)
 text = "50%"
 
 [node name="LabelC" type="Label" parent="."]
 modulate = Color(0.341176, 0.815686, 1, 1)
 offset_left = 24.0
-offset_top = 120.0
+offset_top = 160.0
 offset_right = 64.0
-offset_bottom = 143.0
+offset_bottom = 183.0
+scale = Vector2(2, 2)
 text = "50%"
 
 [node name="Global" type="Label" parent="."]
-offset_left = 23.0
-offset_top = 160.0
-offset_right = 75.0
-offset_bottom = 191.0
+offset_left = 24.0
+offset_top = 215.0
+offset_right = 76.0
+offset_bottom = 246.0
+scale = Vector2(2, 2)
 text = "50%"

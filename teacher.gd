@@ -6,6 +6,7 @@ extends Node3D
 
 var environment: Node
 var currentDestination: Vector2
+var flotte_time :float
 
 var destinations = [
 	Vector2(0, -5),
@@ -24,7 +25,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var currentEnvironment = environment.getEnvironment()
-
+	flotte_time+=delta
+	position.y = sin(2*PI*flotte_time*0.3)*0.5+0.5
 	var kid = findKids(currentEnvironment.kids)
 	if kid != null:
 		catchKid(kid, delta)
